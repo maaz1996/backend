@@ -55,6 +55,26 @@ module.exports = () => {
               if (empty == 0) {
                 console.log("Invalidmove for yellow");
               }
+              let [user] = await gameschema.find({
+                _id: _id,
+              });
+
+              if (user) {
+                user = await user.updateOne(
+                  {
+                    board: board,
+                    won: false,
+                    player: "yellow",
+                    start: start,
+                  },
+                  {
+                    new: true,
+                  }
+                );
+                user.ok === 1
+                  ? resolve("valid move for yellow")
+                  : resolve("Updation Failed, Please Check");
+              }
             } else {
               player = "red";
               for (let j = 0; j < 6; j++) {
@@ -69,9 +89,28 @@ module.exports = () => {
                 console.log("invalidmove for red");
                 won = true;
               }
+              let [user] = await gameschema.find({
+                _id: _id,
+              });
+
+              if (user) {
+                user = await user.updateOne(
+                  {
+                    board: board,
+                    won: false,
+                    player: "red",
+                    start: start,
+                  },
+                  {
+                    new: true,
+                  }
+                );
+                user.ok === 1
+                  ? resolve("valid move for red")
+                  : resolve("Updation Failed, Please Check");
+              }
             }
           }
-          resolve("READY");
         }
       } catch (error) {
         reject(error);

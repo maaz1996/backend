@@ -11,6 +11,11 @@ module.exports = () => {
           status: 200,
           message: "The Game is READY along with refreshed scores and starting",
         });
+      } else {
+        res.status(200).send({
+          status: 200,
+          message: response,
+        });
       }
     } catch (error) {
       next(error);
