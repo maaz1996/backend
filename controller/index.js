@@ -5,10 +5,11 @@ module.exports = () => {
     try {
       const payload = req.body;
       const response = await gameService.connect4(payload);
-      if (response) {
+
+      if (response == "READY") {
         res.status(200).send({
-          status: 400,
-          message: response,
+          status: 200,
+          message: "The Game is READY along with refreshed scores and starting",
         });
       }
     } catch (error) {
