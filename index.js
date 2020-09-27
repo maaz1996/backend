@@ -55,13 +55,9 @@ app.get("/", (req, res) => {
   });
 });
 
-// //login and signup routes
-// const userRoutes = require("./router/auth/authRouter");
-// app.use("/user/auth", userRoutes);
-
-// //goals route
-// const goalsRoutes = require("./router/goals/goalsRouter");
-// app.use("/user/goals", goalsRoutes);
+//game routes
+const gameRoute = require("./router/index");
+app.use("/api", gameRoute);
 
 app.listen(config["port"], () => {
   console.log(`Server listening on port: ${config["port"]}`);
